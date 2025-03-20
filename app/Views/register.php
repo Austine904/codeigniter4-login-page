@@ -13,6 +13,8 @@
                             </div>
 
                         </div>
+
+
                         <div class="col-12 col-sm-6">
                             <div class="form-group">
                                 <label for="lastname">Last Name</label>
@@ -36,9 +38,10 @@
                         <div class="col-12 col-sm-6">
                             <div class="form-group">
                                 <label for="password_confirm">Confirm Password</label>
-                                <input type="password" class="form-control" name="password_confirm" id="password" value="">
+                                <input type="password" class="form-control" name="password_confirm" id="password_confirm" value="">
                             </div>
                         </div>
+
                         <?php if (isset($validation)): ?>
                             <div class="col-12">
                                 <div class="alert alert-danger" role="alert">
