@@ -28,6 +28,6 @@ $routes->setAutoRoute(true);
 $routes->match(['get', 'post'], '/', 'Users::index');
 $routes->match(['get', 'post'], 'register', 'Users::register');
 $routes->match(['get', 'post'], 'login', 'Users::login');
-$routes->match(['get', 'post'], 'logout', 'Users::logout');
+// $routes->match(['get', 'post'], 'logout', 'Users::logout');
 
 
