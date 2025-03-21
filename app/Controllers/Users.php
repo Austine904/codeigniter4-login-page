@@ -14,6 +14,10 @@ class Users extends BaseController
         $data = [];
         helper(['form']);
 
+
+        // $session = session();
+        // $data['session'] = $session;
+
         if ($this->request->getMethod() == 'POST') {
 
             //validation rules
@@ -28,27 +32,27 @@ class Users extends BaseController
             ];
 
 
-            if (! $this->validate($rules, $errors)) {
+            if ( $this->validate($rules, $errors)) {
                 $data['validation'] = $this->validator;
             } else {
 
-                $model = new UserModel();
+            $model = new UserModel();
 
-                $user = $model->model('email', $this->request->getVar('email'))
-                    ->first();
+            $user = $model->where('email', $this->request->getVar('email'))
+                ->first();
 
 
-                $this->setUserMethod($user);
-                return redirect()->to('dashboard');
-            }
-
-            echo view('templates/header', $data);
-            echo view('login');
-            echo view('templates/footer');
+            $this->setUserMethod($user);
+            return redirect()->to('dashboard');
         }
+
+        echo view('templates/header', $data);
+        echo view('login', $data);
+        echo view('templates/footer');
+    }
     }
 
-    
+
     private function setUserMethod($user)
     {
         $data = [
@@ -113,6 +117,17 @@ class Users extends BaseController
 
         echo view('templates/header', $data);
         echo view('register');
+        echo view('templates/footer');
+    }
+
+
+
+
+    public function Dashboard()
+    {
+        $data = [];
+        echo view('templates/header', $data);
+        echo view('dashboard');
         echo view('templates/footer');
     }
 }
