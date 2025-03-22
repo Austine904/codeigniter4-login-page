@@ -1,10 +1,10 @@
 <?php 
-namespace App\validation;
+namespace App\Validation;
 use App\Models\UserModel;
 
-class userRules
+class UserRules
 {
-    public function validateuser(string $str, string $fields, array $data){
+    public function validateUser(string $str, string $fields, array $data){
 
         $model = new UserModel();
         $user = $model->where('email', $data['email'])

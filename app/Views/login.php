@@ -1,7 +1,8 @@
-<?php 
-    helper('session'); 
-    $session = session(); 
-?>
+<?php if (isset($session) && $session->get('success')): ?>
+    <div class="alert alert-success">
+        <?= $session->get('success'); ?>
+    </div>
+<?php endif; ?>
 
 
 <div class="container">
@@ -10,11 +11,8 @@
             <div class="container">
                 <h3>Login</h3>
                 <hr>
-                <?php if (session()->get('success')): ?>
-                    <div class="alert alert-success" role="alert">
-                        <?= session()->get('success') ?>
-                    </div>
-                <?php endif; ?>
+                
+                
                 <form class="" action="/" method="post">
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -25,27 +23,11 @@
                         <input type="password" class="form-control" name="password" id="password" value="">
                     </div>
 
-                    <?php if (isset($validation)): ?>
-                        <div class="col-12">
-                            <div class="alert alert-danger" role="alert">
-                                <?= $validation->listErrors() ?>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-
-
-                    <?php if (session()->getFlashdata('error')): ?>
-                        <div class="alert alert-danger">
-                            <?= $session->getFlashdata('error'); ?>
-                        </div>
-                    <?php endif; ?>
-
-
                     <div class="row">
                         <div class="col-12 col-sm-10 text-right">
                             Don't have an account yet?<a href="/register">Register</a>
                         </div>
-                        <br><br>
+                        
                         <div class="col-12 col-sm-4">
                             <button type="submit" class="btn btn-primary">Login</button>
 
