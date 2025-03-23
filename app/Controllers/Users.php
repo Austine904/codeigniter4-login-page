@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Validation\UserRules;
 
 
 use SebastianBergmann\Template\Template;
@@ -51,9 +52,9 @@ class Users extends BaseController
                 // $this->setUserMethod($user);
                 // return redirect()->to('dashboard');
             }
-            $data['session'] = session();
+            // $data['session'] = session();
             echo view('templates/header', $data);
-            echo view('login', $data);
+            echo view('login' );
             echo view('templates/footer');
         }
     }

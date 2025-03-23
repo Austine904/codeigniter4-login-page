@@ -1,10 +1,3 @@
-<?php if (isset($session) && $session->get('success')): ?>
-    <div class="alert alert-success">
-        <?= $session->get('success'); ?>
-    </div>
-<?php endif; ?>
-
-
 <div class="container">
     <div class="row">
         <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 mt-5 pt-3 bg-white form-wrapper mb-5">
