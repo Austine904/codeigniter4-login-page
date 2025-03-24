@@ -25,11 +25,11 @@ $routes->setAutoRoute(true);
  * @var RouteCollection $routes
  */
 
-$routes->match(['get', 'post'], '/', 'Users::index');
-$routes->match(['get', 'post'], 'register', 'Users::register');
-$routes->match(['get', 'post'], 'login', 'Users::login');
-$routes->match(['get', 'post'], 'dashboard', 'Users::Dashboard');
-
-// $routes->match(['get', 'post'], 'logout', 'Users::logout');
+// $routes->match(['get', 'post'], '/', 'Users::index');
+$routes->match(['get', 'post'], 'register', 'Users::register', ['filter' =>'noauth']);
+$routes->match(['get', 'post'], 'login', 'Users::login', ['filter' =>'noauth']);
+$routes->match(['get', 'post'], 'dashboard', 'Users::Dashboard', ['filter' =>'auth']);
+$routes->match(['get', 'post'], 'profile', 'Users::profile', ['filter' => 'auth']);
+$routes->match(['get', 'post'], 'logout', 'Users::logout');
 
 

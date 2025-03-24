@@ -4,7 +4,7 @@
             <div class="container">
                 <h3>Register</h3>
                 <hr>
-                <form class="" action="/register" method="post">
+                <form class="" action="<?= base_url('/register') ?>" method="post">
                     <div class="row">
                         <div class="col-12 col-sm-6">
                             <div class="form-group">

@@ -10,13 +10,11 @@ use SebastianBergmann\Template\Template;
 
 class Users extends BaseController
 {
-    public function index()
+    public function login()
     {
         $data = [];
         helper(['form']);
         $model = new UserModel();
-
-
 
         if ($this->request->getMethod() == 'POST') {
 
@@ -41,27 +39,28 @@ class Users extends BaseController
                     ->first();
 
                 if ($user) {
-                    $this->setUserMethod($user);
+                    $this->setUserSession($user);
                     return redirect()->to('dashboard');
                 } else {
                     session()->setFlashdata('error', 'Invalid email or password.');
-                    return redirect()->to('/');
+                    return redirect()->to('<?= base_url() ?>/login');
                 }
 
 
                 // $this->setUserMethod($user);
                 // return redirect()->to('dashboard');
             }
-            // $data['session'] = session();
-            echo view('templates/header', $data);
-            echo view('login' );
-            echo view('templates/footer');
+            
         }
+        // $data['session'] = session();
+        echo view('templates/header', $data);
+        echo view('login'  );
+        echo view('templates/footer');
     }
 
 
 
-    private function setUserMethod($user)
+    private function setUserSession($user)
     {
         $data = [
 
@@ -118,7 +117,7 @@ class Users extends BaseController
                 $model->save($newData);
                 $session = session();
                 $session->setFlashdata('success', 'Successful Registration');
-                return redirect()->to('/');
+                return redirect()->to('/login');
             }
         }
 
@@ -144,6 +143,7 @@ class Users extends BaseController
     public function profile(){
         $data = [];
         helper(['form']);
+        $model = new UserModel();
 
         if ($this->request->getMethod() == 'POST') {
 
@@ -162,30 +162,37 @@ class Users extends BaseController
                 $data['validation'] = $this->validator;
             } else {
 
-                //store user data to db
-                $model = new UserModel();
+                //update user data to db
+               
 
                 $newData = [
                     'id' =>session()->get('id'),
-
                     'firstname' => $this->request->getPost('firstname'),
                     'lastname' => $this->request->getPost('lastname'),
                  ];
 
                     if($this->request->getPost('password') !=''){
-                     $newData['password'] = $this->request->getPost('password');
+                        $newData['password'] = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
+
+                    //  $newData['password'] = $this->request->getPost('password');
                     }
 
                 $model->save($newData);
                 $session = session();
-                $session->setFlashdata('success', 'Successfuly Updated');
-                return redirect()->to('/profile');
+                $session->setFlashdata('success', 'Details Successfuly Updated!');
+                return redirect()->to(base_url('/profile'));
             }
+            
         }
 
-        // $data['user'] = $model->where('id', session()->get('id'))->first();
+        $data['user'] = $model->where('id', session()->get('id'))->first();
         echo view('templates/header', $data);
         echo view('profile');
         echo view('templates/footer');
+    }
+
+    public function logout(){
+        session()->destroy();
+        return redirect()->to(base_url('/login'));
     }
 }
