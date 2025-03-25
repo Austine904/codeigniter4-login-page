@@ -36,6 +36,11 @@
                     </ul>
                     <ul class="navbar-nav my-2 my-lg-0">
                         <li class="nav-item">
+                            <a class="nav-link" href="<?= base_url('/cart') ?>">Cart </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav my-2 my-lg-0">
+                        <li class="nav-item">
                             <a class="nav-link" href="<?= base_url('/logout') ?>">Logout</a>
                         </li>
                     </ul>

@@ -31,5 +31,7 @@ $routes->match(['get', 'post'], 'login', 'Users::login', ['filter' =>'noauth']);
 $routes->match(['get', 'post'], 'dashboard', 'Users::Dashboard', ['filter' =>'auth']);
 $routes->match(['get', 'post'], 'profile', 'Users::profile', ['filter' => 'auth']);
 $routes->match(['get', 'post'], 'logout', 'Users::logout');
+$routes->match(['get', 'post'], 'cart', 'Users::cart', ['filter' => 'auth']);
+
 
 

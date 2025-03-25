@@ -4,8 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 use App\Validation\UserRules;
-
-
+use Config\Images;
 use SebastianBergmann\Template\Template;
 
 class Users extends BaseController
@@ -163,8 +162,6 @@ class Users extends BaseController
             } else {
 
                 //update user data to db
-               
-
                 $newData = [
                     'id' =>session()->get('id'),
                     'firstname' => $this->request->getPost('firstname'),
@@ -174,7 +171,6 @@ class Users extends BaseController
                     if($this->request->getPost('password') !=''){
                         $newData['password'] = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
 
-                    //  $newData['password'] = $this->request->getPost('password');
                     }
 
                 $model->save($newData);
@@ -195,4 +191,21 @@ class Users extends BaseController
         session()->destroy();
         return redirect()->to(base_url('/login'));
     }
+
+
+    public function cart()
+    {
+        $data = [];
+        helper(['form']);
+        $model = new UserModel();
+       
+
+
+        $data['user'] = $model->where('id', session()->get('id'))->first();
+        echo view('templates/header', $data);
+        echo view('cart');
+        echo view('templates/footer');
+        
+    }
+
 }
