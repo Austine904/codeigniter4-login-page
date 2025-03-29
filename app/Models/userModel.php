@@ -19,14 +19,21 @@ class UserModel extends Model
 
         return $data;
     }
+
+    /**
+     * Hash the password before updating the user
+     *
+     * @param array $data
+     * @return array
+     */
     protected function beforeUpdate(array $data)
     {
         $data = $this->passwordHash($data);
-
-
-
         return $data;
     }
+
+
+
     protected function passwordHash(array $data)
     {
         //password hashing
@@ -35,5 +42,20 @@ class UserModel extends Model
 
 
         return $data;
+    }
+    
+}
+  
+class CartModel extends Model
+{
+    protected $table = 'cart_items';  // Database table name
+    protected $primaryKey = 'id';  // Primary key field
+
+    protected $allowedFields = ['user_id', 'product_id', 'quantity', 'created_at'];
+
+    // Fetch all cart items for a specific user
+    public function getCartItems($userId)
+    {
+        return $this->where('user_id', $userId)->findAll();
     }
 }

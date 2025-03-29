@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\CartModel;
 use App\Models\UserModel;
 use App\Validation\UserRules;
 use Config\Images;
@@ -193,17 +194,19 @@ class Users extends BaseController
     }
 
 
-    public function cart()
+    public function ViewCart()
     {
-        $data = [];
+        $model = new CartModel();
+        $userId = session()->get('id');
+        $data = ['cartItems' => $model->getCartItems($userId)];
         helper(['form']);
-        $model = new UserModel();
-       
 
-
-        $data['user'] = $model->where('id', session()->get('id'))->first();
+        
+        //store user data to db
+ 
+    //     $data['user'] = $model->where('id', session()->get('id'))->first();
         echo view('templates/header', $data);
-        echo view('cart');
+        echo view('cart', $data);
         echo view('templates/footer');
         
     }
